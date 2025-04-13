@@ -1,46 +1,81 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>GameSaga</title>
+    <title>Rock Paper Scissors - GameSaga</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #6e8efb, #a777e3);
             color: white;
             text-align: center;
-        }
-        .game-card {
-            background: rgba(255,255,255,0.2);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 15px auto;
-            max-width: 300px;
-            backdrop-filter: blur(5px);
-            transition: transform 0.3s;
-        }
-        .game-card:hover {
-            transform: scale(1.05);
+            margin: 0;
         }
         h1 {
-            font-size: 3em;
-            margin: 20px 0;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            font-size: 2.5em;
+            margin: 20px;
+        }
+        .choice {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px;
+            display: inline-block;
+            cursor: pointer;
+            font-size: 1.5em;
+        }
+        .choice:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        #result {
+            font-size: 1.5em;
+            margin: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            background: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #ddd;
         }
     </style>
 </head>
 <body>
-    <h1>🎮 GameSaga</h1>
-    
-    <div class="game-card" onclick="location='snake.html'">
-        <h2>🐍 Pro Snake</h2>
-        <p>Classic snake with modern twist</p>
+    <h1>✊ Rock Paper Scissors</h1>
+    <div>
+        <div class="choice" onclick="play('rock')">Rock</div>
+        <div class="choice" onclick="play('paper')">Paper</div>
+        <div class="choice" onclick="play('scissors')">Scissors</div>
     </div>
-    
-    <div class="game-card" onclick="location='2048.html'">
-        <h2>🧩 2048 Puzzle</h2>
-        <p>Combine tiles to reach 2048!</p>
-    </div>
-    
-    <!-- Add more game cards -->
+    <div id="result">Choose your move!</div>
+    <button onclick="reset()">Reset</button>
+    <script>
+        function play(playerChoice) {
+            const choices = ['rock', 'paper', 'scissors'];
+            const computerChoice = choices[Math.floor(Math.random() * 3)];
+            let result = '';
+
+            if (playerChoice === computerChoice) {
+                result = `Tie! Both chose ${playerChoice}.`;
+            } else if (
+                (playerChoice === 'rock' && computerChoice === 'scissors') ||
+                (playerChoice === 'paper' && computerChoice === 'rock') ||
+                (playerChoice === 'scissors' && computerChoice === 'paper')
+            ) {
+                result = `You win! ${playerChoice} beats ${computerChoice}.`;
+            } else {
+                result = `You lose! ${computerChoice} beats ${playerChoice}.`;
+            }
+
+            document.getElementById('result').textContent = result;
+        }
+
+        function reset() {
+            document.getElementById('result').textContent = 'Choose your move!';
+        }
+    </script>
 </body>
 </html>
