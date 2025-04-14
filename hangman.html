@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hangman - GameSaga</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #111;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    h1 {
+      margin-top: 20px;
+    }
+    #hangman-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #word {
+      font-size: 2rem;
+      letter-spacing: 10px;
+      margin: 20px;
+    }
+    #letters button {
+      margin: 5px;
+      padding: 10px 15px;
+      font-size: 1.1rem;
+      background: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #letters button:disabled {
+      background: #777;
+      cursor: default;
+    }
+    #status {
+      margin-top: 20px;
+      font-size: 1.3rem;
+    }
+    svg {
+      width: 200px;
+      height: 250px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hangman</h1>
+  <div id="hangman-container">
+    <svg viewBox="0 0 200 250">
+      <line x1="10" y1="240" x2="190" y2="240" stroke="white" stroke-width="4"/>
+      <line x1="50" y1="240" x2="50" y2="20" stroke="white" stroke-width="4"/>
+      <line x1="50" y1="20" x2="150" y2="20" stroke="white" stroke-width="4"/>
+      <line x1="150" y1="20" x2="150" y2="50" stroke="white" stroke-width="4"/>
+      <circle id="head" cx="150" cy="70" r="20" stroke="white" stroke-width="4" fill="none" style="display:none;"/>
+      <line id="body" x1="150" y1="90" x2="150" y2="150" stroke="white" stroke-width="4" style="display:none;"/>
+      <line id="leftArm" x1="150" y1="100" x2="120" y2="130" stroke="white" stroke-width="4" style="display:none;"/>
+      <line id="rightArm" x1="150" y1="100" x2="180" y2="130" stroke="white" stroke-width="4" style="display:none;"/>
+      <line id="leftLeg" x1="150" y1="150" x2="120" y2="190" stroke="white" stroke-width="4" style="display:none;"/>
+      <line id="rightLeg" x1="150" y1="150" x2="180" y2="190" stroke="white" stroke-width="4" style="display:none;"/>
+    </svg>
+    <div id="word"></div>
+    <div id="letters"></div>
+    <div id="status"></div>
+  </div>
+
+  <script>
+    const words = ["javascript", "hangman", "illustration", "canvas", "code"];
+    const answer = words[Math.floor(Math.random() * words.length)].toUpperCase();
+    const wordEl = document.getElementById("word");
+    const lettersEl = document.getElementById("letters");
+    const statusEl = document.getElementById("status");
+
+    let guessed = [];
+    let wrong = 0;
+    const maxWrong = 6;
+    const parts = ["head", "body", "leftArm", "rightArm", "leftLeg", "rightLeg"];
+
+    function renderWord() {
+      wordEl.textContent = answer
+        .split("")
+        .map(l => (guessed.includes(l) ? l : "_"))
+        .join(" ");
+    }
+
+    function renderLetters() {
+      const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      lettersEl.innerHTML = "";
+      alphabet.split("").forEach(letter => {
+        const btn = document.createElement("button");
+        btn.textContent = letter;
+        btn.disabled = guessed.includes(letter);
+        btn.onclick = () => guessLetter(letter);
+        lettersEl.appendChild(btn);
+      });
+    }
+
+    function guessLetter(letter) {
+      guessed.push(letter);
+      if (!answer.includes(letter)) {
+        document.getElementById(parts[wrong]).style.display = "block";
+        wrong++;
+      }
+      renderWord();
+      renderLetters();
+      checkGameOver();
+    }
+
+    function checkGameOver() {
+      if (wrong >= maxWrong) {
+        statusEl.textContent = `You lost! Word was: ${answer}`;
+        lettersEl.innerHTML = "";
+      } else if (answer.split("").every(l => guessed.includes(l))) {
+        statusEl.textContent = "🎉 You won!";
+        lettersEl.innerHTML = "";
+      }
+    }
+
+    renderWord();
+    renderLetters();
+  </script>
+</body>
+</html>
