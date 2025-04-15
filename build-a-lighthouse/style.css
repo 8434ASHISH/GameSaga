@@ -1,0 +1,27 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to top, #001f3f, #0074D9);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+#gameCanvas {
+  background: #011627;
+  border: 4px solid #00bfff;
+  border-radius: 8px;
+}
+
+#message {
+  margin-top: 15px;
+  font-size: 1.2rem;
+}
