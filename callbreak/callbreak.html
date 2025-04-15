@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Call Break Game</title>
+  <link rel="stylesheet" href="callbreak.css">
+</head>
+<body>
+  <div class="game-container">
+    <h1>Call Break Scoreboard</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Player</th>
+          <th>Bid</th>
+          <th>Won</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody id="scoreboard">
+        <tr>
+          <td>Player 1</td>
+          <td><input type="number" id="bid1" min="0"></td>
+          <td><input type="number" id="won1" min="0"></td>
+          <td id="points1">0</td>
+        </tr>
+        <tr>
+          <td>Player 2</td>
+          <td><input type="number" id="bid2" min="0"></td>
+          <td><input type="number" id="won2" min="0"></td>
+          <td id="points2">0</td>
+        </tr>
+        <tr>
+          <td>Player 3</td>
+          <td><input type="number" id="bid3" min="0"></td>
+          <td><input type="number" id="won3" min="0"></td>
+          <td id="points3">0</td>
+        </tr>
+        <tr>
+          <td>Player 4</td>
+          <td><input type="number" id="bid4" min="0"></td>
+          <td><input type="number" id="won4" min="0"></td>
+          <td id="points4">0</td>
+        </tr>
+      </tbody>
+    </table>
+    <button onclick="calculatePoints()">Update Score</button>
+  </div>
+
+  <script>
+    function calculatePoints() {
+      for (let i = 1; i <= 4; i++) {
+        const bid = parseInt(document.getElementById(`bid${i}`).value) || 0;
+        const won = parseInt(document.getElementById(`won${i}`).value) || 0;
+        const points = won >= bid ? bid + (won - bid) : bid - (bid - won);
+        document.getElementById(`points${i}`).textContent = points;
+      }
+    }
+  </script>
+</body>
+</html>
