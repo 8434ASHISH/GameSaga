@@ -1,81 +1,107 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Rock Paper Scissors - GameSaga</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
-            color: white;
-            text-align: center;
-            margin: 0;
-        }
-        h1 {
-            font-size: 2.5em;
-            margin: 20px;
-        }
-        .choice {
-            background: rgba(255,255,255,0.2);
-            border-radius: 10px;
-            padding: 15px;
-            margin: 10px;
-            display: inline-block;
-            cursor: pointer;
-            font-size: 1.5em;
-        }
-        .choice:hover {
-            background: rgba(255,255,255,0.3);
-        }
-        #result {
-            font-size: 1.5em;
-            margin: 20px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 1em;
-            border: none;
-            border-radius: 5px;
-            background: #fff;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #ddd;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GameSaga - Play Retro HTML Games Free</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0e0e0e;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+      background: linear-gradient(90deg, #ff416c, #ff4b2b);
+    }
+    header h1 {
+      font-size: 3em;
+      margin: 0;
+    }
+    header p {
+      font-size: 1.2em;
+      margin-top: 10px;
+      color: #f9f9f9;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .game-card {
+      background: #1e1e1e;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    .game-card:hover {
+      transform: scale(1.05);
+      background: #292929;
+    }
+    .game-card a {
+      color: #00eaff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    footer {
+      background: #111;
+      padding: 40px 20px;
+      margin-top: 50px;
+    }
+    footer h3 {
+      color: #ff416c;
+    }
+    footer p, footer a {
+      color: #ccc;
+      font-size: 0.95em;
+      line-height: 1.6;
+    }
+  </style>
 </head>
 <body>
-    <h1>✊ Rock Paper Scissors</h1>
-    <div>
-        <div class="choice" onclick="play('rock')">Rock</div>
-        <div class="choice" onclick="play('paper')">Paper</div>
-        <div class="choice" onclick="play('scissors')">Scissors</div>
-    </div>
-    <div id="result">Choose your move!</div>
-    <button onclick="reset()">Reset</button>
-    <script>
-        function play(playerChoice) {
-            const choices = ['rock', 'paper', 'scissors'];
-            const computerChoice = choices[Math.floor(Math.random() * 3)];
-            let result = '';
 
-            if (playerChoice === computerChoice) {
-                result = `Tie! Both chose ${playerChoice}.`;
-            } else if (
-                (playerChoice === 'rock' && computerChoice === 'scissors') ||
-                (playerChoice === 'paper' && computerChoice === 'rock') ||
-                (playerChoice === 'scissors' && computerChoice === 'paper')
-            ) {
-                result = `You win! ${playerChoice} beats ${computerChoice}.`;
-            } else {
-                result = `You lose! ${computerChoice} beats ${playerChoice}.`;
-            }
+<header>
+  <h1>GameSaga</h1>
+  <p>Your Free Arcade of Classic HTML Games</p>
+</header>
 
-            document.getElementById('result').textContent = result;
-        }
+<div class="container">
+  <h2 style="text-align:center; margin-bottom: 30px;">Play Now</h2>
+  <div class="grid">
+    <div class="game-card"><a href="callbreak/index.html">Call Break</a></div>
+    <div class="game-card"><a href="build-a-lighthouse/index.html">Build a Lighthouse</a></div>
+    <div class="game-card"><a href="block-dude.html">Block Dude</a></div>
+    <div class="game-card"><a href="hangman.html">Hangman</a></div>
+    <div class="game-card"><a href="helicopter.html">Helicopter</a></div>
+    <div class="game-card"><a href="missile-command.html">Missile Command</a></div>
+    <div class="game-card"><a href="pong.html">Pong</a></div>
+    <div class="game-card"><a href="snake.html">Snake</a></div>
+    <div class="game-card"><a href="tetris.html">Tetris</a></div>
+  </div>
+</div>
 
-        function reset() {
-            document.getElementById('result').textContent = 'Choose your move!';
-        }
-    </script>
+<footer class="container">
+  <h3>About Us</h3>
+  <p>GameSaga is your retro gaming zone with a collection of nostalgic HTML games made to be played instantly in your browser. No installs. No logins. Just fun.</p>
+
+  <h3>Privacy Policy</h3>
+  <p>We do not collect any personal data or store cookies. All games are self-contained and run locally on your device.</p>
+
+  <h3>Disclaimer</h3>
+  <p>All games are provided as-is for entertainment purposes only. GameSaga holds no responsibility for third-party content or gameplay outcomes.</p>
+
+  <h3>Contact for Ads</h3>
+  <p>If you're interested in advertising or promoting your product on GameSaga, reach out to: <br><strong>contact@gamesaga.dev</strong></p>
+</footer>
+
 </body>
 </html>
